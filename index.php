@@ -11,15 +11,25 @@ function create_memcached($conf) {
 	return $mem;
 }
 
-$n = 100;
+$n = 10000;
 
 
 $mem = create_memcached($mem_conf);
 
-for ($i = 1; $i <= $n; $i++) {
-	$mem->set("k".$i, $i);
-}
+if (1) {
 
+	for ($i = 1; $i <= $n; $i++) {
+		$mem->set("k".$i, $i);
+	}
+	echo "设置参数1-$n";
+} else {
+	
+	for ($i = 1; $i <= $n; $i++) {
+		echo $mem->get("k".$i);
+		echo " <--> "
+	}
+	echo "获取结果1-$n";
+}
 
 
 
