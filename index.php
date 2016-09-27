@@ -26,9 +26,9 @@ if (1) {
 	
 	for ($i = 1; $i <= $n; $i++) {
 		echo $mem->get("k".$i);
-		echo " <--> "
+		echo " <--> ";
 	}
-	echo "获取结果1-$n";
+	echo "<br />获取结果1-$n";
 }
 
 
