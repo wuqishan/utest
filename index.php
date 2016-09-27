@@ -14,7 +14,7 @@ function create_memcached($conf) {
 $n = 100;
 
 
-$mem = create_memcached(mem_conf);
+$mem = create_memcached($mem_conf);
 
 for ($i = 1; $i <= $n; $i++) {
 	$mem->set("k".$i, $i);
