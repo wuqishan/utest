@@ -1,13 +1,16 @@
 <?php
 
 $mem_conf = [
-	['localhost', 11211, 10],
-	['localhost', 11212, 90]
+	['host' => 'localhost', 'port' => 11211, 'long' => true, 'weight' => 10],
+	['host' => 'localhost', 'port' => 11212, 'long' => true, 'weight' => 90]
 ];
 
 function create_memcached($conf) {
 	$mem = new Memcached();
-	$mem->addServers($conf);
+	foreach ($conf as $v) {
+		$mem->addServer($v['host'], $v['port'], $v['long'], $v['weight']);
+	}
+	
 	return $mem;
 }
 
