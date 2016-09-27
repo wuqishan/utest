@@ -1,20 +1,22 @@
 <?php
 
 $mem_conf = [
-	['host' => 'localhost', 'port' => 11211, 'long' => true, 'weight' => 10],
-	['host' => 'localhost', 'port' => 11212, 'long' => true, 'weight' => 90]
+	['host' => 'localhost', 'port' => 11211, 'weight' => 10],
+	['host' => 'localhost', 'port' => 11212, 'weight' => 90]
 ];
 
 function create_memcached($conf) {
 	$mem = new Memcached();
+	// 必须使用这个选项，权重设置才会有效果
+	$mem->setOption(Memcached::OPT_LIBKETAMA_COMPATIBLE, true);
 	foreach ($conf as $v) {
-		$mem->addServer($v['host'], $v['port'], $v['long'], $v['weight']);
+		$mem->addServer($v['host'], $v['port'], $v['weight']);
 	}
 	
 	return $mem;
 }
 
-$n = 100000;
+$n = 1000;
 
 
 $mem = create_memcached($mem_conf);
@@ -28,7 +30,7 @@ if (1) {
 } else {
 	
 	for ($i = 1; $i <= $n; $i++) {
-		echo $mem->get("k".$i);
+		var_dump($mem->get("k".$i));
 		echo " <--> ";
 	}
 	echo "<br />获取结果1-$n";
